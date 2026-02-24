@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forgive Me BUBU ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle, #ff5f6d, #ffc371);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4em;
+    margin: 0;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    to { text-shadow: 0 0 25px rgba(255,255,255,0.9); }
+}
+
+h2 {
+    margin-top: 15px;
+    min-height: 40px;
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff2e63;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+#yesBtn:hover {
+    transform: scale(1.15);
+}
+
+#noBtn {
+    background: #252a34;
+    color: white;
+}
+
+#finalMessage {
+    font-size: 3.2em;
+    margin-top: 40px;
+    display: none;
+    font-family: 'Dancing Script', cursive;
+    animation: zoomIn 1.5s ease forwards;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-900px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>I am Sorry BUBU 💔</h1>
+<h2 id="typing"></h2>
+
+<div class="buttons" id="buttonContainer">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<div id="finalMessage">I LOVE YOU FOREVER BUBU ❤️</div>
+
+<script>
+const text = "Can you forgive me... please? 🥺";
+const typingEl = document.getElementById("typing");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const finalMessage = document.getElementById("finalMessage");
+const buttonContainer = document.getElementById("buttonContainer");
+
+let i = 0;
+function typeWriter() {
+    if (i < text.length) {
+        typingEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 70);
+    }
+}
+typeWriter();
+
+function acceptLove() {
+    buttonContainer.style.display = "none";   // 💥 Buttons disappear
+    finalMessage.style.display = "block";     // 💖 Message appears
+    generateHearts();
+}
+
+yesBtn.addEventListener("click", acceptLove);
+
+// Even NO leads to love 😄
+noBtn.addEventListener("click", acceptLove);
+
+function generateHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 250);
+}
+</script>
+
+</body>
+</html>

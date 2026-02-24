@@ -10,6 +10,7 @@
 <style>
 body {
     margin: 0;
+    padding: 0;
     height: 100vh;
     overflow: hidden;
     background: radial-gradient(circle, #ff5f6d, #ffc371);
@@ -30,13 +31,13 @@ h1 {
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-    to { text-shadow: 0 0 25px rgba(255,255,255,0.9); }
+    from { text-shadow: 0 0 10px #fff; }
+    to { text-shadow: 0 0 30px #ff2e63; }
 }
 
 h2 {
-    margin-top: 15px;
-    min-height: 40px;
+    margin-top: 10px;
+    font-weight: 300;
 }
 
 .buttons {
@@ -56,7 +57,7 @@ button {
 #yesBtn {
     background: #ff2e63;
     color: white;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 0 20px #ff2e63;
 }
 
 #yesBtn:hover {
@@ -73,11 +74,11 @@ button {
     margin-top: 40px;
     display: none;
     font-family: 'Dancing Script', cursive;
-    animation: zoomIn 1.5s ease forwards;
+    animation: zoomIn 1.5s forwards;
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0.5); opacity: 0; }
+    from { transform: scale(0); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
 
@@ -90,7 +91,7 @@ button {
 
 @keyframes floatUp {
     from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-900px); opacity: 0; }
+    to { transform: translateY(-800px); opacity: 0; }
 }
 </style>
 </head>
@@ -98,9 +99,9 @@ button {
 <body>
 
 <h1>I am Sorry BUBU 💔</h1>
-<h2 id="typing"></h2>
+<h2>Can you forgive me?</h2>
 
-<div class="buttons" id="buttonContainer">
+<div class="buttons">
     <button id="yesBtn">Yes ❤️</button>
     <button id="noBtn">No 😢</button>
 </div>
@@ -108,34 +109,24 @@ button {
 <div id="finalMessage">I LOVE YOU FOREVER BUBU ❤️</div>
 
 <script>
-const text = "Can you forgive me... please? 🥺";
-const typingEl = document.getElementById("typing");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const finalMessage = document.getElementById("finalMessage");
-const buttonContainer = document.getElementById("buttonContainer");
 
-let i = 0;
-function typeWriter() {
-    if (i < text.length) {
-        typingEl.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 70);
-    }
-}
-typeWriter();
-
-function acceptLove() {
-    buttonContainer.style.display = "none";   // 💥 Buttons disappear
-    finalMessage.style.display = "block";     // 💖 Message appears
+// YES CLICK
+yesBtn.addEventListener("click", () => {
+    noBtn.style.display = "none";      // No disappears
+    yesBtn.style.display = "none";     // Yes also disappears (dramatic clean ending)
+    finalMessage.style.display = "block";
     generateHearts();
-}
+});
 
-yesBtn.addEventListener("click", acceptLove);
+// NO CLICK
+noBtn.addEventListener("click", () => {
+    noBtn.style.display = "none";      // Only No disappears
+});
 
-// Even NO leads to love 😄
-noBtn.addEventListener("click", acceptLove);
-
+// HEART EFFECT
 function generateHearts() {
     setInterval(() => {
         const heart = document.createElement("div");

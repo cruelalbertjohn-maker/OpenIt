@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forgive Me BUBU ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Intro Screen */
+#intro {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    letter-spacing: 2px;
+    animation: fadeOut 4s forwards 3s;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4em;
+    margin: 0;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff4b5c; }
+    to { text-shadow: 0 0 30px #ff1e56; }
+}
+
+h2 {
+    margin-top: 20px;
+    font-weight: 300;
+    min-height: 40px;
+}
+
+.buttons {
+    margin-top: 30px;
+    position: relative;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff1e56;
+    color: white;
+    box-shadow: 0 0 20px #ff1e56;
+}
+
+#yesBtn:hover {
+    transform: scale(1.2);
+}
+
+#noBtn {
+    background: #333;
+    color: white;
+    position: absolute;
+}
+
+#finalMessage {
+    font-size: 3.5em;
+    margin-top: 40px;
+    display: none;
+    font-family: 'Dancing Script', cursive;
+    animation: zoomIn 2s forwards;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-1000px); opacity: 0; }
+}
+
+/* Flash effect */
+.flash {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">Every love story has a moment like this...</div>
+
+<h1>I am Sorry BUBU 💔</h1>
+<h2 id="typing"></h2>
+
+<div class="buttons">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<div id="finalMessage">I LOVE YOU FOREVER BUBU ❤️</div>
+<div class="flash" id="flash"></div>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const text = "Can you forgive me... please? 🥺";
+const typingEl = document.getElementById("typing");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const finalMessage = document.getElementById("finalMessage");
+const flash = document.getElementById("flash");
+
+let i = 0;
+function typeWriter() {
+    if (i < text.length) {
+        typingEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 70);
+    }
+}
+setTimeout(typeWriter, 3500);
+
+// YES CLICK
+yesBtn.addEventListener("click", () => {
+    flash.style.opacity = "1";
+    setTimeout(() => flash.style.opacity = "0", 200);
+
+    finalMessage.style.display = "block";
+    generateHearts();
+});
+
+// NO BUTTON ESCAPE + SHRINK
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+    noBtn.style.transform = "scale(0.7)";
+});
+
+noBtn.addEventListener("click", () => yesBtn.click());
+
+// HEART RAIN
+function generateHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.fontSize = (Math.random() * 30 + 15) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 200);
+}
+</script>
+
+</body>
+</html>
